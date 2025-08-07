@@ -1,35 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import Todoitem from "./components/Todoitem";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const todoList = ["Học bài", "Học bài 1", "Học bài 2", "Học bài 3"];
+
+  const todos = todoList.map((todo) => {
+    return <Todoitem name={todo} />;
+  });
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="container">
+      <input
+        type="text"
+        name="add-new-task"
+        className="task-input"
+        alt="Add new task"
+        placeholder="Add new task"
+      />
+
+      <div>{todos}</div>
+    </div>
+  );
 }
 
-export default App
+export default App;
