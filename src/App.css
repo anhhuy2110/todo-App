@@ -21,3 +21,18 @@
   margin-bottom: 5px;
   color: black;
 }
+
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+} 
+
+.todo-item-ifoLeft {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo-item-text {
+  margin-left: 5px;
+}
