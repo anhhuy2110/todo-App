@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import "./Sidebar.css";
 
 const Sidebar = (propps) => {
@@ -6,7 +6,21 @@ const Sidebar = (propps) => {
   const data = propps.todoItem;
 
   const [name,setName] = useState(data.name);
+
+  const [isImportant, setIsImportant] = useState(data.isImportant);
+
+  const [isCompleted, setIsCompleted] = useState(data.isCompleted);
   
+
+  const handleSave = () => {
+    const newTodo = {...data, name, isImportant, isCompleted}
+    propps.handTodoItemChange(newTodo);
+    propps.setShowSidebar(false);
+  }
+
+  const handleCancle = () =>  {
+    propps.setShowSidebar(false);
+  }
   
   return (
     <div className="sidebar">
@@ -27,9 +41,9 @@ const Sidebar = (propps) => {
           <input 
             type="checkbox" 
             name="isImportant" 
-            checked={data.isImportant}
+            checked={isImportant}
             onChange={() => {
-              
+              setIsImportant(!isImportant);
             }}
           />
         </div>
@@ -38,13 +52,16 @@ const Sidebar = (propps) => {
           <input 
             type="checkbox" 
             name="isCompleted" 
-            checked={data.isCompleted}
+            checked={isCompleted}
+            onChange={() => {
+              setIsCompleted(!isCompleted);
+            }}
           />
         </div>
       </form>
       <div className="groupBtn">
-        <div className="btn cancleBtn">Cancle</div>
-        <div className="btn">Save</div>
+        <div className="btn cancleBtn" onClick={handleCancle}>Cancle</div>
+        <div className="btn" onClick={handleSave}>Save</div>
       </div>
     </div>
   );

@@ -31,10 +31,10 @@ function App() {
     setTodoList(newTodoList);
   };
 
-  const handTodoNameChange = (todoId,newTodoName) => {
+  const handTodoitemChange = (newTodo) => {
     const newTodoList = todoList.map( (todo) => {
-      if(todoId === todo.id)
-        return {...todo,name: newTodoName}
+      if(newTodo.id === todo.id)
+        return newTodo
       return todo;
     })
     setTodoList(newTodoList);
@@ -82,8 +82,10 @@ function App() {
       <div>{todos}</div>
       {showSidebar && (
         <Sidebar 
+          key={activeTodoItemId}
           todoItem={activeTodoItem} 
-          handTodoNameChange={handTodoNameChange}
+          handTodoItemChange={handTodoitemChange}
+          setShowSidebar={setShowSidebar}
         />
       )}
     </div>
