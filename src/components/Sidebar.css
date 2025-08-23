@@ -1,0 +1,72 @@
+* {
+  box-sizing: border-box;
+}
+
+.sidebar {
+  position: absolute;
+  z-index: 1;
+  width: 300px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgb(240, 240, 240);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.infoSidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 25px 15px;
+}
+
+.todoName {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  border-color: none;
+}
+
+.todoName input{
+  border: none;
+}
+
+.isImportant {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.isCompleted {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.groupBtn {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 75vh;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 132px;
+  height: 32px;
+  background-color: rgb(68, 56, 173);
+  color: white;
+}
+
+.cancleBtn {
+  background-color: white;
+  color: rgb(68, 56, 173);
+}

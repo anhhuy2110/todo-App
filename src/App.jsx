@@ -12,8 +12,14 @@ function App() {
     { id: 5, name: "Học bài 5", isImportant: false, isCompleted: false },
   ]);
 
+  const [activeTodoItemId, setActiveTodoItemId] = useState();
+
+  const [showSidebar, setShowSidebar] = useState(false);
+
   const inputRef = useRef();
   // console.log({inputRef});
+
+  const activeTodoItem = todoList.find( todo => todo.id === activeTodoItemId);
 
   const handleCheckbox = (todoId) => {
     const newTodoList = todoList.map((todo) => {
@@ -25,6 +31,20 @@ function App() {
     setTodoList(newTodoList);
   };
 
+  const handTodoNameChange = (todoId,newTodoName) => {
+    const newTodoList = todoList.map( (todo) => {
+      if(todoId === todo.id)
+        return {...todo,name: newTodoName}
+      return todo;
+    })
+    setTodoList(newTodoList);
+  }
+  
+  const handleShowSidebar = (todoId) => {
+    setShowSidebar(true);
+    setActiveTodoItemId(todoId);
+  }
+
   const todos = todoList.map((todo, index) => {
     return (
       <Todoitem
@@ -34,6 +54,7 @@ function App() {
         isImportant={todo.isImportant}
         isCompleted={todo.isCompleted}
         handleCheckbox={handleCheckbox}
+        handleShowSidebar={handleShowSidebar}
       />
     );
   });
@@ -59,7 +80,12 @@ function App() {
       />
 
       <div>{todos}</div>
-      {/* <Sidebar /> */}
+      {showSidebar && (
+        <Sidebar 
+          todoItem={activeTodoItem} 
+          handTodoNameChange={handTodoNameChange}
+        />
+      )}
     </div>
   );
 }

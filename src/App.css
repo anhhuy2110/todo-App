@@ -1,6 +1,7 @@
 .container {
   padding: 30px;
-  background-color: aliceblue;
+  background-color: rgb(240,240,240);
+  height: 100vh;
 }
 
 .todo-item-text {
