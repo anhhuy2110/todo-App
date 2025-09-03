@@ -1,7 +1,12 @@
 .container {
+  display: flex;
+}
+
+.main-content {
+  width: 70vw;;
+  height: 100vh;
   padding: 30px;
   background-color: rgb(240,240,240);
-  height: 100vh;
 }
 
 .todo-item-text {
@@ -37,3 +42,13 @@
 .todo-item-text {
   margin-left: 5px;
 }
+
+/* -----------LEFT SIDEBAR---------------- */
+
+.left-sidebar {
+  width: 30%;
+  padding: 20px;
+
+}
+
+
