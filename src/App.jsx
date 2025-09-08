@@ -2,7 +2,7 @@ import "./App.css";
 import Todoitem from "./components/Todoitem";
 import Sidebar from "./components/Sidebar";
 import FilterPanel from "./components/FilterPanel";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 function App() {
   const [todoList, setTodoList] = useState([
@@ -49,7 +49,10 @@ function App() {
 
   const [showSidebar, setShowSidebar] = useState(false);
 
+  const [searchText, setSearchText] = useState('');
+
   const inputRef = useRef();
+
   // console.log({inputRef});
 
   const activeTodoItem = todoList.find((todo) => todo.id === activeTodoItemId);
@@ -77,34 +80,36 @@ function App() {
     setActiveTodoItemId(todoId);
   };
 
-  const FilterTodos = todoList
-    .filter((todo) => {
-      switch(selectedFilterId) {
-        case "all": 
+  const FilterTodos = useMemo(() => {
+    return todoList.filter((todo) => {
+      if(!todo.name.includes(searchText))
+        return false;
+      switch (selectedFilterId) {
+        case "all":
           return true;
         case "important":
           return todo.isImportant;
         case "completed":
           return todo.isCompleted;
-        case "deleted": 
+        case "deleted":
           return todo.isDeleted;
-        default: 
+        default:
           return true;
       }
-    })
-    .map((todo) => {
-      return (
-        <Todoitem
-          id={todo.id}
-          name={todo.name}
-          key={todo.id}
-          isImportant={todo.isImportant}
-          isCompleted={todo.isCompleted}
-          handleCheckbox={handleCheckbox}
-          handleShowSidebar={handleShowSidebar}
-        />
-      );
     });
+  }, [todoList, selectedFilterId, searchText]).map((todo) => {
+    return (
+      <Todoitem
+        id={todo.id}
+        name={todo.name}
+        key={todo.id}
+        isImportant={todo.isImportant}
+        isCompleted={todo.isCompleted}
+        handleCheckbox={handleCheckbox}
+        handleShowSidebar={handleShowSidebar}
+      />
+    );
+  });
 
   function addItem(e) {
     if (e.key === "Enter") {
@@ -121,6 +126,8 @@ function App() {
           selectedFilterId={selectedFilterId}
           setSelectedFilterId={setSelectedFilterId}
           todoList={todoList}
+          searchText={searchText}
+          setSearchText={setSearchText}
         />
       </div>
       <div className="main-content">
