@@ -120,6 +120,7 @@ function App() {
         <FilterPanel
           selectedFilterId={selectedFilterId}
           setSelectedFilterId={setSelectedFilterId}
+          todoList={todoList}
         />
       </div>
       <div className="main-content">

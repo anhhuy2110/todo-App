@@ -1,5 +1,5 @@
 import "./FilterPanel.css";
-// import ProTypes from 'prop-type';
+// import PropTypes from 'prop-types';
 
 const FILTER_ITEMS = [
   {
@@ -27,8 +27,21 @@ const FILTER_ITEMS = [
   },
 ];
 
-const FilterPanel = ({selectedFilterId,setSelectedFilterId}) => {
+const FilterPanel = ({selectedFilterId,setSelectedFilterId, todoList}) => {
   // const [selectedFilterId, setSelectedFilterId] = useState("all");
+
+  const countByFilterType = todoList.reduce((acc, cur) => {
+    let newAcc = {...acc};
+    if(cur.isCompleted === true)
+      newAcc = {...newAcc, completed: newAcc.completed + 1};
+    if(cur.isImportant === true) 
+      newAcc = {...newAcc, important: newAcc.important + 1};
+    if(cur.isDeleted === true)
+      newAcc = {...newAcc, deleted: newAcc.deleted + 1};
+    return newAcc; 
+  },{all: todoList.length, important: 0, completed: 0, deleted: 0});
+
+  console.log(countByFilterType);
 
   return (
     <div className="filter-panel">
@@ -51,7 +64,7 @@ const FilterPanel = ({selectedFilterId,setSelectedFilterId}) => {
                 </div>
                 <p>{filterItem.label}</p>
               </div>
-              <strong>15</strong>
+              <strong>{countByFilterType[filterItem.id]}</strong>
             </div>
           );
         })}
@@ -61,8 +74,9 @@ const FilterPanel = ({selectedFilterId,setSelectedFilterId}) => {
 };
 
 // FilterPanel.prototype = {
-//   selectedFilterId: ProTypes.string,
-//   setSelectedFilterId: ProTypes.func,
+//   selectedFilterId: PropTypes.string,
+//   setSelectedFilterId: PropTypes.func,
+//   todoList: PropTypes.array,
 // }
 
 export default FilterPanel;
