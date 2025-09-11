@@ -1,0 +1,40 @@
+*{
+    box-sizing: border-box;
+}
+
+.category-list {
+    margin-top: 300px;
+}
+
+.category-list .category-title {
+    font-weight: 600;
+    color: aliceblues;
+}
+
+.category-item {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.category-item .name-item {
+    display: flex;
+    justify-items: center;
+    align-content: center;
+    
+}
+
+.category-item img {
+    position: relative;
+    margin-right: 5px;
+}
+
+.category-item  .name-item  p{
+    font-weight: 600;
+}
+
+.category-list .selected {
+    background-color: #0F548C;
+    color: white;
+}

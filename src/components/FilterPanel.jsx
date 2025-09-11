@@ -1,32 +1,9 @@
 import { useMemo } from "react";
 import "./FilterPanel.css";
+import CategoryList from "./CategoryList";
+import FilterPanelList from "./FilterPanelList";
 // import PropTypes from 'prop-types';
 
-const FILTER_ITEMS = [
-  {
-    id: "all",
-    label: "All",
-    iconPath: "./public/inbox.png",
-  },
-
-  {
-    id: "important",
-    label: "Important",
-    iconPath: "/public/flag.png",
-  },
-
-  {
-    id: "completed",
-    label: "Completed",
-    iconPath: "./public/check.png",
-  },
-
-  {
-    id: "deleted",
-    label: "Deleted",
-    iconPath: "./public/delete.png",
-  },
-];
 
 const FilterPanel = ({ selectedFilterId, setSelectedFilterId, todoList, searchText, setSearchText}) => {
   // const [selectedFilterId, setSelectedFilterId] = useState("all");
@@ -46,7 +23,7 @@ const FilterPanel = ({ selectedFilterId, setSelectedFilterId, todoList, searchTe
     );
   }, [todoList]);
 
-  console.log(countByFilterType);
+  // console.log(countByFilterType);
 
   return (
     <div className="filter-panel">
@@ -59,35 +36,17 @@ const FilterPanel = ({ selectedFilterId, setSelectedFilterId, todoList, searchTe
           }}
           />
       </div>
-      <div className="filter-items">
-        {FILTER_ITEMS.map((filterItem) => {
-          return (
-            <div
-              key={filterItem.id}
-              className={`item 
-              ${filterItem.id === selectedFilterId ? "selected" : ""}
-              `}
-              onClick={() => setSelectedFilterId(filterItem.id)}
-            >
-              <div className="item-name">
-                <div className="img">
-                  <img src={filterItem.iconPath} alt="All" />
-                </div>
-                <p>{filterItem.label}</p>
-              </div>
-              <strong>{countByFilterType[filterItem.id]}</strong>
-            </div>
-          );
-        })}
-      </div>
+      
+      <FilterPanelList 
+        selectedFilterId = {selectedFilterId}
+        setSelectedFilterId = {setSelectedFilterId}
+        countByFilterType = {countByFilterType}
+      />
+
+      <CategoryList />
+
     </div>
   );
 };
-
-// FilterPanel.prototype = {
-//   selectedFilterId: PropTypes.string,
-//   setSelectedFilterId: PropTypes.func,
-//   todoList: PropTypes.array,
-// }
 
 export default FilterPanel;

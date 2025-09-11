@@ -3,7 +3,8 @@
 }
 
 .filter-panel {
-  display: grid;
+  display: flex;
+  flex-direction: column;
 }
 
 .filter-panel input {

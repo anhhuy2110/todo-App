@@ -2,7 +2,8 @@ import "./App.css";
 import Todoitem from "./components/Todoitem";
 import Sidebar from "./components/Sidebar";
 import FilterPanel from "./components/FilterPanel";
-import { useMemo, useRef, useState } from "react";
+import { useContext, useMemo, useRef, useState } from "react";
+import { AppContext } from "./context/AppProvider";
 
 function App() {
   const [todoList, setTodoList] = useState([
@@ -12,6 +13,7 @@ function App() {
       isImportant: false,
       isCompleted: false,
       isDeleted: false,
+      category: "personal",
     },
     {
       id: 2,
@@ -19,6 +21,7 @@ function App() {
       isImportant: false,
       isCompleted: false,
       isDeleted: false,
+      category: "personal",
     },
     {
       id: 3,
@@ -26,6 +29,7 @@ function App() {
       isImportant: false,
       isCompleted: true,
       isDeleted: false,
+      category: "personal",
     },
     {
       id: 4,
@@ -33,6 +37,7 @@ function App() {
       isImportant: true,
       isCompleted: false,
       isDeleted: false,
+      category: "company",
     },
     {
       id: 5,
@@ -40,6 +45,7 @@ function App() {
       isImportant: false,
       isCompleted: false,
       isDeleted: false,
+      category: "personal",
     },
   ]);
 
@@ -51,9 +57,13 @@ function App() {
 
   const [searchText, setSearchText] = useState('');
 
+  const { selectCategoryId } = useContext(AppContext);
+
   const inputRef = useRef();
 
   // console.log({inputRef});
+
+  console.log(selectCategoryId);
 
   const activeTodoItem = todoList.find((todo) => todo.id === activeTodoItemId);
 
@@ -82,8 +92,15 @@ function App() {
 
   const FilterTodos = useMemo(() => {
     return todoList.filter((todo) => {
-      if(!todo.name.includes(searchText))
+
+      if(!todo.name.includes(searchText)){
         return false;
+      }
+
+      if( selectCategoryId && todo.category !== selectCategoryId) {
+        return false;
+      }
+
       switch (selectedFilterId) {
         case "all":
           return true;
@@ -96,8 +113,10 @@ function App() {
         default:
           return true;
       }
+      
     });
-  }, [todoList, selectedFilterId, searchText]).map((todo) => {
+
+  }, [todoList, selectedFilterId, searchText, selectCategoryId]).map((todo) => {
     return (
       <Todoitem
         id={todo.id}
@@ -105,6 +124,7 @@ function App() {
         key={todo.id}
         isImportant={todo.isImportant}
         isCompleted={todo.isCompleted}
+        category={todo.category}
         handleCheckbox={handleCheckbox}
         handleShowSidebar={handleShowSidebar}
       />

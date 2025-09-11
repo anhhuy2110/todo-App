@@ -1,4 +1,5 @@
-import React, { use, useState } from "react";
+import React, {useState } from "react";
+import { CATEGORY_ITEMS } from "./constants";
 import "./Sidebar.css";
 
 const Sidebar = (propps) => {
@@ -10,10 +11,12 @@ const Sidebar = (propps) => {
   const [isImportant, setIsImportant] = useState(data.isImportant);
 
   const [isCompleted, setIsCompleted] = useState(data.isCompleted);
+
+  const [category, setCategory] = useState(data.category);
   
 
   const handleSave = () => {
-    const newTodo = {...data, name, isImportant, isCompleted}
+    const newTodo = {...data, name, isImportant, isCompleted, category}
     propps.handTodoItemChange(newTodo);
     propps.setShowSidebar(false);
   }
@@ -59,6 +62,21 @@ const Sidebar = (propps) => {
           />
         </div>
       </form>
+      <div className="sb-form-field">
+        <label htmlFor="sb-category">Category</label>
+        <select 
+          id="sb-category" 
+          value={category} 
+          onChange={(e) => {
+            setCategory(e.target.value);
+        }}>
+          {CATEGORY_ITEMS.map((category) => {
+            return (
+              <option value={category.id} key={category.id}>{category.label}</option>
+            )
+          })}
+        </select>
+      </div>
       <div className="groupBtn">
         <div className="btn cancleBtn" onClick={handleCancle}>Cancle</div>
         <div className="btn" onClick={handleSave}>Save</div>

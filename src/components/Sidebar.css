@@ -6,6 +6,7 @@
   position: absolute;
   z-index: 1;
   width: 300px;
+  height: 100vh;
   right: 0;
   top: 0;
   bottom: 0;
@@ -28,7 +29,7 @@
   border-color: none;
 }
 
-.todoName input{
+.todoName input {
   border: none;
 }
 
@@ -53,7 +54,10 @@
 .groupBtn {
   display: flex;
   justify-content: space-around;
-  margin-top: 75vh;
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  padding: 25px 15px;
 }
 
 .btn {
@@ -69,4 +73,15 @@
 .cancleBtn {
   background-color: white;
   color: rgb(68, 56, 173);
+  margin-right: 10px;
+}
+
+.sb-form-field {
+  display: grid;
+  grid-template-columns: 40%;
+  padding: 25px 15px;
+}
+
+.sb-form-field select {
+  margin-top: 5px;
 }
