@@ -26,8 +26,6 @@ const FilterPanel = ({ searchText, setSearchText}) => {
     );
   }, [todoList]);
 
-  // console.log(countByFilterType);
-
   return (
     <div className="filter-panel">
       <div className="search">
@@ -44,8 +42,9 @@ const FilterPanel = ({ searchText, setSearchText}) => {
         countByFilterType = {countByFilterType}
       />
 
-      <CategoryList />
-
+      <CategoryList 
+        // countByFilterCategory={countByFilterCategory}
+      />
     </div>
   );
 };
