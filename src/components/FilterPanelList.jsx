@@ -1,10 +1,10 @@
 import React from "react";
+import useAppContext from "../context/useAppContext";
 
 const FilterPanelList = ({
-  selectedFilterId,
-  setSelectedFilterId,
   countByFilterType,
 }) => {
+  const {selectedFilterId, setSelectedFilterId} = useAppContext();
   const FILTER_ITEMS = [
     {
       id: "all",

@@ -2,72 +2,29 @@ import "./App.css";
 import Todoitem from "./components/Todoitem";
 import Sidebar from "./components/Sidebar";
 import FilterPanel from "./components/FilterPanel";
-import { useContext, useMemo, useRef, useState } from "react";
-import { AppContext } from "./context/AppProvider";
+import {useMemo, useRef, useState } from "react";
+import useAppContext from "./context/useAppContext";
 
 function App() {
-  const [todoList, setTodoList] = useState([
-    {
-      id: 1,
-      name: "Học bài 1",
-      isImportant: false,
-      isCompleted: false,
-      isDeleted: false,
-      category: "personal",
-    },
-    {
-      id: 2,
-      name: "Học bài 2",
-      isImportant: false,
-      isCompleted: false,
-      isDeleted: false,
-      category: "personal",
-    },
-    {
-      id: 3,
-      name: "Học bài 3",
-      isImportant: false,
-      isCompleted: true,
-      isDeleted: false,
-      category: "personal",
-    },
-    {
-      id: 4,
-      name: "Học bài 4",
-      isImportant: true,
-      isCompleted: false,
-      isDeleted: false,
-      category: "company",
-    },
-    {
-      id: 5,
-      name: "Học bài 5",
-      isImportant: false,
-      isCompleted: false,
-      isDeleted: false,
-      category: "personal",
-    },
-  ]);
-
-  const [selectedFilterId, setSelectedFilterId] = useState("all");
-
-  const [activeTodoItemId, setActiveTodoItemId] = useState();
-
-  const [showSidebar, setShowSidebar] = useState(false);
-
-  const [searchText, setSearchText] = useState('');
-
-  const { selectCategoryId } = useContext(AppContext);
+  const { 
+    selectCategoryId, 
+    todoList, 
+    setTodoList,
+    selectedFilterId, 
+    activeTodoItemId, 
+    setActiveTodoItemId,
+    showSidebar, 
+    setShowSidebar,
+    searchText, 
+    setSearchText,
+  } = useAppContext()
 
   const inputRef = useRef();
-
-  // console.log({inputRef});
-
-  console.log(selectCategoryId);
 
   const activeTodoItem = todoList.find((todo) => todo.id === activeTodoItemId);
 
   const handleCheckbox = (todoId) => {
+    
     const newTodoList = todoList.map((todo) => {
       if (todo.id === todoId) {
         return { ...todo, isCompleted: !todo.isCompleted };
@@ -143,9 +100,8 @@ function App() {
     <div className="container">
       <div className="left-sidebar">
         <FilterPanel
-          selectedFilterId={selectedFilterId}
-          setSelectedFilterId={setSelectedFilterId}
-          todoList={todoList}
+          // selectedFilterId={selectedFilterId}
+          // setSelectedFilterId={setSelectedFilterId}
           searchText={searchText}
           setSearchText={setSearchText}
         />

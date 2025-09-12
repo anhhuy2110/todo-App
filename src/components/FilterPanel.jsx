@@ -2,11 +2,14 @@ import { useMemo } from "react";
 import "./FilterPanel.css";
 import CategoryList from "./CategoryList";
 import FilterPanelList from "./FilterPanelList";
+import useAppContext from "../context/useAppContext";
 // import PropTypes from 'prop-types';
 
 
-const FilterPanel = ({ selectedFilterId, setSelectedFilterId, todoList, searchText, setSearchText}) => {
-  // const [selectedFilterId, setSelectedFilterId] = useState("all");
+const FilterPanel = ({ searchText, setSearchText}) => {
+
+  const {todoList } = useAppContext();
+
   const countByFilterType = useMemo(() => {
     return todoList.reduce(
       (acc, cur) => {
@@ -38,8 +41,6 @@ const FilterPanel = ({ selectedFilterId, setSelectedFilterId, todoList, searchTe
       </div>
       
       <FilterPanelList 
-        selectedFilterId = {selectedFilterId}
-        setSelectedFilterId = {setSelectedFilterId}
         countByFilterType = {countByFilterType}
       />
 
